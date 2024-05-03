@@ -68,9 +68,6 @@ class MainActivity2 : AppCompatActivity() {
                         list2.visibility=View.GONE
                         list1.visibility=View.VISIBLE
                     }
-
-
-
                 }
                 .show()
 

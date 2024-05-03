@@ -21,7 +21,7 @@ class MainActivity3 : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main3)
         loadFragment(Home())
-        val bottomnav = findViewById(R.id.bottomNav) as BottomNavigationView
+        bottomNav = findViewById(R.id.bottomNav) as BottomNavigationView
         bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.home -> {
@@ -42,14 +42,23 @@ class MainActivity3 : AppCompatActivity() {
                     loadFragment(Setting())
                     true
                 }
-
+               else->{
+                   true
+               }
             }
         }
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+
+
+
+
     }
 
     private  fun loadFragment(fragment: Fragment){
