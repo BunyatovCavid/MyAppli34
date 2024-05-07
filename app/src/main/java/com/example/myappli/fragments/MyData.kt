@@ -1,5 +1,6 @@
 package com.example.myappli.fragments
 
+import com.bumptech.glide.Glide
 import com.example.myappli.ItemData
 
 class MyData {

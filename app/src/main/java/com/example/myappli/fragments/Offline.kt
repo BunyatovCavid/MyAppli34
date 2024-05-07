@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myappli.ItemData
 import com.example.myappli.R
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -19,11 +21,11 @@ private const val ARG_PARAM2 = "param2"
  * Use the [Offline.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Offline : Fragment() {
+class Offline : Fragment(), ItemAdapter.OnItemClickListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+    private  lateinit   var data:List<ItemData>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -40,9 +42,9 @@ class Offline : Fragment() {
         var view = inflater.inflate(R.layout.fragment_offline, container, false)
         val recycle = view.findViewById<RecyclerView>(R.id.recycle)
 
-        val data = MyData().GetDatas(3)
+        data = MyData().GetDatas(3)
         recycle.layoutManager = LinearLayoutManager(context)
-        recycle.adapter= ItemAdapter(data)
+        recycle.adapter= ItemAdapter(data,this)
 
 
         return view
@@ -67,4 +69,16 @@ class Offline : Fragment() {
                 }
             }
     }
+
+    override fun alertDialog(position: Int) {
+        view?.let {
+            MaterialAlertDialogBuilder(it.context).setTitle("Alert")
+                .setMessage(data[position].name + "selected"
+                )
+                .setNegativeButton("No"){dialog, which->
+                }
+        }
+    }
+
+
 }

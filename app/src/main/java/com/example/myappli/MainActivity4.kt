@@ -1,7 +1,10 @@
 package com.example.myappli
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -21,14 +24,17 @@ class MainActivity4 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+           enableEdgeToEdge()
+        setContentView(R.layout.activity_main4)
+        load(All())
         navb=findViewById(R.id.nav) as BottomNavigationView
         navb.setOnItemSelectedListener {
             when(it.itemId)
             {
-               R.id.all-> {
-                   load(All())
-                   true
-               }
+                R.id.all-> {
+                    load(All())
+                    true
+                }
                 R.id.Online-> {
                     load(Online())
                     true
@@ -37,13 +43,27 @@ class MainActivity4 : AppCompatActivity() {
                     load(Offline())
                     true
                 }
-               else->{
-                   true}
+                else->{
+                    true}
             }
         }
 
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main4)
+        var b1 = findViewById<RadioButton>(R.id.rb1)
+        var b2 = findViewById<RadioButton>(R.id.rb2)
+        var b3 = findViewById<RadioButton>(R.id.rb3)
+
+        b3.setOnClickListener(){
+            load(All())
+        }
+        b2.setOnClickListener(){
+            load(Online())
+        }
+        b1.setOnClickListener(){
+            load(Offline())
+        }
+
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -52,12 +72,13 @@ class MainActivity4 : AppCompatActivity() {
 
 
 
-
     }
 
+
+    @SuppressLint("SuspiciousIndentation")
     private fun load(fragment : Fragment){
       val  tra = supportFragmentManager.beginTransaction()
-        tra.replace(R.id.container,fragment)
+        tra.replace(R.id.container14,fragment)
       tra.commit()
     }
 

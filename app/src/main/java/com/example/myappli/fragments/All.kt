@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.myappli.ItemData
 import com.example.myappli.R
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,11 +23,12 @@ private const val ARG_PARAM2 = "param2"
  * Use the [All.newInstance] factory method to
  * create an instance of this fragment.
  */
-class All : Fragment() {
+class All : Fragment(), ItemAdapter.OnItemClickListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+   private  lateinit   var recycle:RecyclerView
+   private  lateinit   var data:List<ItemData>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -41,11 +44,15 @@ class All : Fragment() {
         // Inflate the layout for this fragment
 
         var view = inflater.inflate(R.layout.fragment_all, container, false)
-        val recycle = view.findViewById<RecyclerView>(R.id.recycle)
+        recycle = view.findViewById<RecyclerView>(R.id.recycle)
 
-        val data = MyData().GetDatas(1)
+        data = MyData().GetDatas(1)
         recycle.layoutManager = LinearLayoutManager(context)
-        recycle.adapter= ItemAdapter(data)
+        recycle.adapter= ItemAdapter(data, this)
+
+        recycle.setOnClickListener(){       
+        }
+
 
 
         return view
@@ -72,5 +79,16 @@ class All : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun alertDialog(position: Int) {
+        view?.let {
+            MaterialAlertDialogBuilder(it.context).setTitle("Alert")
+                .setMessage(data[position].name + "selected"
+                )
+                .setNegativeButton("No"){dialog, which->
+                }
+                .show()
+        }
     }
 }
