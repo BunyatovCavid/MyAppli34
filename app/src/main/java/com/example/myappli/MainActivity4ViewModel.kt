@@ -1,10 +1,7 @@
-package com.example.myappli.fragments
+package com.example.myappli
 
-import com.bumptech.glide.Glide
-import com.example.myappli.ItemData
-
-class MyData {
-
+class MainActivity4ViewModel //:ViewModel()
+{
     fun GetDatas(choose : Int) : List<ItemData> {
 
         var response = listOf<ItemData>()
@@ -165,6 +162,5 @@ class MyData {
 
         return response
     }
-
 
 }
